@@ -1,0 +1,49 @@
+----- Create New -----
+python -m venv venv
+
+
+----- Activate the venv -----
+venv\Scripts\activate
+
+
+----- Install Flask -----
+pip install Flask
+
+----Run App -----
+python server.py
+
+-----RESTful-----
+rest= a set of rules /principles for designing web API's (theory)
+RESTful= an API that follows those REST rules correctly (practive)
+
+    A RESTful API is one that:
+        -uses HTTP methods consistently:
+            GET -> retrieve data
+            POST -> create data
+            PUT -> update data
+            DELETE -> remove data.
+    
+    HTTP status codes:
+        -three digit numbers returned by a server to indicate the result of a clients request.
+        -They help developers and clients understand whether a request was successful, failed, or needs further action.
+
+        -Common 2xx Success codes
+            200 means OK, 
+                for example:GET/Products
+            201 means created,
+                for example: POST/products
+            204 means 'No Content'
+                example: DELETE/products
+        
+        -Common 4xx Error Codes:
+            400 means bad request, Used when there is missing or invalid input
+            401 means unauthorized
+            403 means forbidden
+            404 means Not Found
+            405 means Conflict
+
+        - Common 5xx Server Error Codes:
+            500 means internal server error.
+            503 means service unavailable.
+
+    WHEN USING ["POST"], be in the body tab of thunder clkient
