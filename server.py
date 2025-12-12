@@ -194,7 +194,41 @@ def get_coupon_by_id(coupon_id):
 
     return "Not Found"
 
+# PUT /api/coupons
+@app.route("/api/coupons/<int:coupon_id>", methods=["PUT"])
+def update_coupon(coupon_id):
+    data = request.get_json()
+    print(data)
 
+    for coupon in coupons:
+        if coupon["_id"] == coupon_id:
+            coupon["code"] = data["code"]
+            coupon["discount"] = data["discount"]
+            return jsonify({
+                "success": True,
+                "message": "Coupon Updated Successfully",
+                "data": data
+            }), HTTPStatus.OK
+    return jsonify({
+        "success": False,
+        "message": "Coupon Not Found"
+    }), HTTPStatus.NOT_FOUND
+
+
+# DELETE /api/coupons
+@app.route("/api/coupons/<int:coupon_id>", methods=["DELETE"])
+def delete_coupon(coupon_id):
+    for index, coupon in enumerate(coupons):
+        if coupon["_id"]  == coupon_id:
+            coupons.pop(index)
+            return jsonify({
+                "success": True,
+                "message": "Coupon Deleted Successfully"
+            }), HTTPStatus.OK # 200
+    return jsonify({
+        "success": False,
+        "Message": "Product Not Found" 
+    }), HTTPStatus.NOT_FOUND # 404
 
 
 
