@@ -62,7 +62,7 @@ products = [
   },
   {
     "_id": 2,
-    "title": "Smart Refrigerator",
+    "title": "Smart Refrigerator SE",
     "price": 999.99,
     "category": "Kitchen",
     "image": "https://picsum.photos/seed/2/300/300"
@@ -115,6 +115,26 @@ def create_product():
     }), HTTPStatus.CREATED # 201
     
 # PUT /api/products
+@app.route("/api/products/<int:product_id>", methods=["PUT"])
+def update_product(product_id):
+    data = request.get_json()
+    print(data)
+
+    for product in products:
+        if product["_id"] == product_id:
+            product["title"] = data["title"]
+            product["price"] = data["price"]
+            product["category"] = data["category"]
+            product["image"] = data["image"]
+            return jsonify({
+                "success": True,
+                "message": "Product Updated Successfully",
+                "data": data
+            }), HTTPStatus.OK
+    return jsonify({
+        "success": False,
+        "message": "Product Not Found"
+    }), HTTPStatus.NOT_FOUND
 
 # DELETE /api/products
 @app.route("/api/products/<int:product_id>", methods=["DELETE"])
@@ -122,8 +142,14 @@ def delete_product(product_id):
     for index, product in enumerate(products):
         if product["_id"]  == product_id:
             products.pop(index)
-            return "product deleted"
-    return "Not Found"
+            return jsonify({
+                "success": True,
+                "message": "Product Deleted Successfully"
+            }), HTTPStatus.OK # 200
+    return jsonify({
+        "success": False,
+        "Message": "Product Not Found" 
+    }), HTTPStatus.NOT_FOUND # 404
 
 
 

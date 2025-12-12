@@ -47,3 +47,16 @@ RESTful= an API that follows those REST rules correctly (practive)
             503 means service unavailable.
 
     WHEN USING ["POST"], be in the body tab of thunder clkient
+
+    LINK TO ONLINE STORE
+
+    in store: install Axios import axios from axios
+              in Admin.jsx: make new funtion
+                const getCoupons = async () => {
+                    const response = await axios({
+                        url: "/http://127.0.0.1:5000/api/coupons",
+                        methods: "GET"
+                    })
+
+                    console.log(response)
+                }
